@@ -137,7 +137,7 @@ func NewSettings(filePath string) *Settings {
 
 We first instantiate a new instance of our `Settings` model and store a reference to it in the `mySettings` variable. Once we have an instance of our model, we **must** configure the model in order for it to synchronize with the file system at the defined path. Because we have embedded `filedb.Model`, it implements the `Configure` method, which expects a reference to a `filedb.Config` instance.
 
-We provide a configuration that includes a reference to our model instance `mySettings`, the file path to the db file for this model, any default file data (optional), and a `filedb.Translator` instance - responsible for marshalling and unmarshalling the data to/from disk into our model. In this case, we are storing our data in the `json` file format, so we will use the built-in `JSON` translator from filedb.
+We provide a configuration that includes a reference to our model instance `mySettings`, the file path to the db file for this model, any default file data (optional), and a `filedb.Translator` instance - responsible for marshalling and unmarshalling the data to be read/written to/from disk. In this case, we are storing our data in the `json` file format, so we will use the built-in `JSON` translator from filedb.
 
 If any errors occur, fail with a panic - for demo purposes.
 
