@@ -21,14 +21,24 @@ func (db *Model) Save() error {
 	db.mu.Lock()
 	defer db.mu.Unlock()
 
-	return db.cfg.Translator.Save(db.Path(), db.cfg.ModelObj)
+	data, err := db.cfg.Translator.Serialize(db.cfg.ModelObj)
+	if err != nil {
+		return err
+	}
+
+	return write(db.Path(), data)
 }
 
 func (db *Model) Load() error {
 	db.mu.Lock()
 	defer db.mu.Unlock()
 
-	return db.cfg.Translator.Load(db.Path(), db.cfg.ModelObj)
+	data, err := read(db.Path())
+	if err != nil {
+		return err
+	}
+
+	return db.cfg.Translator.Deserialize(data, db.cfg.ModelObj)
 }
 
 func (db *Model) Path() string {

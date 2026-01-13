@@ -1,6 +1,6 @@
 package filedb
 
 type Translator interface {
-	Save(path string, obj any) error
-	Load(path string, obj any) error
+	Serialize(obj any) ([]byte, error)
+	Deserialize(data []byte, obj any) error
 }
